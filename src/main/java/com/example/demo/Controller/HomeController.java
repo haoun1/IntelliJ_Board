@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -22,6 +23,8 @@ public class HomeController {
     @GetMapping(value = "/")
     public String home(Model model)
     {
+        List<UserDto> userList=uService.getUserList();
+        model.addAttribute("userList", userList);
         return "home";
     }
     @PostMapping(value = "/")
@@ -38,6 +41,6 @@ public class HomeController {
     public String result_alarm(@RequestParam("msg") String param, Model model)
     {
         model.addAttribute("msg", param);
-        return "home";
+        return "result_alarm";
     }
 }
